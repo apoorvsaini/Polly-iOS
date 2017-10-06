@@ -61,18 +61,30 @@ class PLYFriendsController: PLYController {
            
         }
         
-        //pre-calcuate the height of sections
+        //pre-calcuate the heights of sections
         let addSectionHeight : Int  = usersToAdd.count * 100
         let inviteSectionHeight : Int  = usersInContacts.count * 100
+        
+        
+        //Add section header for Invite
         
         //card UI for Add Friends section
         let addSection = UIView()
         mainView.addSubview(addSection)
         addSection.backgroundColor = UIColor.white
         addSection.layer.cornerRadius = 12
+        addSection.layer.shadowColor = UIColor.black.cgColor
+        addSection.layer.shadowOpacity = 0.05
+        addSection.layer.shadowOffset =  CGSize(width: 0, height:4)
+        addSection.layer.shadowRadius = 10
         addSection.snp.makeConstraints { (make) -> Void in
             make.centerX.equalToSuperview()
-            make.height.equalTo(addSectionHeight)
+            if(addSectionHeight == 0) {
+                make.height.equalTo(100)
+            }
+            else {
+                make.height.equalTo(addSectionHeight)
+            }
             make.top.equalTo((cardView?.snp.top)!).offset(50)
             make.right.equalTo((cardView?.snp.right)!).offset(-20)
         }
@@ -81,13 +93,22 @@ class PLYFriendsController: PLYController {
         mainView.addSubview(inviteSection)
         inviteSection.backgroundColor = UIColor.white
         inviteSection.layer.cornerRadius = 12
+        inviteSection.layer.shadowColor = UIColor.black.cgColor
+        inviteSection.layer.shadowOpacity = 0.05
+        inviteSection.layer.shadowOffset =  CGSize(width: 0, height:4)
+        inviteSection.layer.shadowRadius = 10
         inviteSection.snp.makeConstraints { (make) -> Void in
             make.centerX.equalToSuperview()
-            make.height.equalTo(inviteSectionHeight)
+            if(addSectionHeight == 0) {
+                make.height.equalTo(100)
+            }
+            else {
+                 make.height.equalTo(inviteSectionHeight)
+            }
             make.top.equalTo((cardView?.snp.top)!).offset(addSectionHeight + 100)
             make.right.equalTo((cardView?.snp.right)!).offset(-20)
         }
-    
+        
 
         //UI for each row in add view card
         var addCounter = 0
