@@ -53,20 +53,32 @@ class PLYFriendsController: PLYController {
          */
         
         
-        //calcuate the width of sections
+        //pre-calcuate the height of sections
+        let addSectionHeight : Int  = usersToAdd.count * 100
+        let inviteSectionHeight : Int  = usersInContacts.count * 100
         
-        
-        //section card UI
-        let section = UIView()
-        cardView?.addSubview(section)
-        section.backgroundColor = UIColor.white
-        section.layer.cornerRadius = 12
-        section.snp.makeConstraints { (make) -> Void in
+        //card UI for Add Friends section
+        let addSection = UIView()
+        cardView?.addSubview(addSection)
+        addSection.backgroundColor = UIColor.white
+        addSection.layer.cornerRadius = 12
+        addSection.snp.makeConstraints { (make) -> Void in
             make.centerX.equalToSuperview()
-            make.height.equalTo(100)
+            make.height.equalTo(addSectionHeight)
             make.top.equalTo((cardView?.snp.top)!).offset(50)
             make.right.equalTo((cardView?.snp.right)!).offset(-20)
         }
+        
+        //UI for each row in add view card
+        let addCardRow = UIView()
+        for user in usersToAdd {
+            //print(user.firstName)
+            addSection.addSubview(addCardRow)
+            addCardRow.layer.borderWidth = 1.0
+            addCardRow.layer.borderColor = UIColor.black.cgColor
+        }
+        
+        
         
     }
 
