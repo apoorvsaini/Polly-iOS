@@ -81,7 +81,6 @@ class PLYFriendsController: PLYController {
         }
         
         //UI for each row in add view card
-        
         var addCounter = 0
         for user in usersToAdd {
             let addCardRow = UIView()
@@ -97,12 +96,12 @@ class PLYFriendsController: PLYController {
             //add name label
             let adduserLabel = UILabel()
             addCardRow.addSubview(adduserLabel)
-            adduserLabel.text = user.firstName
+            adduserLabel.text = user.firstName!+" "+user.lastName!
             adduserLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
             adduserLabel.textColor = UIColor.black
             adduserLabel.snp.makeConstraints { (make) -> Void in
                 make.centerY.equalTo(addCardRow)
-                make.left.equalTo(addCardRow.snp.left).inset(100)
+                make.left.equalTo(addCardRow.snp.left).inset(80)
             }
             
             //add user image
@@ -115,10 +114,86 @@ class PLYFriendsController: PLYController {
                 make.width.equalTo(50)
                 make.left.equalTo(addCardRow.snp.left).inset(10)
             }
+            
+            //add "Add" button
+            let addButton = UIButton()
+            addCardRow.addSubview(addButton)
+            addButton.setTitle("+ Add", for: .normal)
+            addButton.backgroundColor = UIColor(red:0.00, green:0.76, blue:1.00, alpha:1.0)
+            addButton.layer.cornerRadius = 20
+            addButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 10.0)
+            addButton.titleEdgeInsets = UIEdgeInsetsMake(10,10,10,10)
+            addButton.snp.makeConstraints { (make) -> Void in
+                make.centerY.equalTo(addCardRow)
+                make.height.equalTo(40)
+                make.width.equalTo(60)
+                make.right.equalTo(addCardRow.snp.right).offset(-10)
+            }
             addCounter += 1
         }
         
         
+        //UI for each row in invite view card
+        var inviteCounter = 0
+        for user in usersInContacts {
+            let inviteCardRow = UIView()
+            inviteSection.addSubview(inviteCardRow)
+            inviteCardRow.snp.makeConstraints { (make) -> Void in
+                make.centerX.equalToSuperview()
+                make.height.equalTo(100)
+                make.top.equalTo((inviteSection.snp.top)).offset(inviteCounter * 100).priority((inviteCounter * 10) + 1)
+                make.right.equalTo((inviteSection.snp.right)).offset(0)
+            }
+            
+            //add name label
+            let adduserLabel = UILabel()
+            inviteCardRow.addSubview(adduserLabel)
+            adduserLabel.text = user.firstName!+" "+user.lastName!
+            adduserLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
+            adduserLabel.textColor = UIColor.black
+            adduserLabel.snp.makeConstraints { (make) -> Void in
+                make.top.equalTo(inviteCardRow.snp.top).inset(30).priority(10)
+                make.left.equalTo(inviteCardRow.snp.left).inset(80)
+            }
+            
+            //add phone label
+            let phoneLabel = UILabel()
+            inviteCardRow.addSubview(phoneLabel)
+            phoneLabel.text = user.phoneNumber
+            phoneLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
+            phoneLabel.textColor = UIColor(red:0.41, green:0.41, blue:0.41, alpha:1.0)
+            phoneLabel.snp.makeConstraints { (make) -> Void in
+                make.top.equalTo(inviteCardRow.snp.top).inset(50).priority(20)
+                make.left.equalTo(inviteCardRow.snp.left).inset(80)
+            }
+            
+            //add user image
+            let addUserImage = UIImageView()
+            inviteCardRow.addSubview(addUserImage)
+            addUserImage.image = user.avatar
+            addUserImage.snp.makeConstraints { (make) -> Void in
+                make.centerY.equalTo(inviteCardRow)
+                make.height.equalTo(50)
+                make.width.equalTo(50)
+                make.left.equalTo(inviteCardRow.snp.left).inset(10)
+            }
+            
+            //add "Add" button
+            let addButton = UIButton()
+            inviteCardRow.addSubview(addButton)
+            addButton.setTitle("+ Add", for: .normal)
+            addButton.backgroundColor = UIColor(red:0.00, green:0.76, blue:1.00, alpha:1.0)
+            addButton.layer.cornerRadius = 20
+            addButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 10.0)
+            addButton.titleEdgeInsets = UIEdgeInsetsMake(10,10,10,10)
+            addButton.snp.makeConstraints { (make) -> Void in
+                make.centerY.equalTo(inviteCardRow)
+                make.height.equalTo(40)
+                make.width.equalTo(60)
+                make.right.equalTo(inviteCardRow.snp.right).offset(-10)
+            }
+            inviteCounter += 1
+        }
         
     }
 
