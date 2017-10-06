@@ -69,13 +69,41 @@ class PLYFriendsController: PLYController {
             make.right.equalTo((cardView?.snp.right)!).offset(-20)
         }
         
+        let inviteSection = UIView()
+        cardView?.addSubview(inviteSection)
+        inviteSection.backgroundColor = UIColor.white
+        inviteSection.layer.cornerRadius = 12
+        inviteSection.snp.makeConstraints { (make) -> Void in
+            make.centerX.equalToSuperview()
+            make.height.equalTo(inviteSectionHeight)
+            make.top.equalTo((cardView?.snp.top)!).offset(addSectionHeight + 100)
+            make.right.equalTo((cardView?.snp.right)!).offset(-20)
+        }
+        
         //UI for each row in add view card
         let addCardRow = UIView()
+        var addCounter = 0
         for user in usersToAdd {
-            //print(user.firstName)
+            print(user.firstName)
             addSection.addSubview(addCardRow)
-            addCardRow.layer.borderWidth = 1.0
-            addCardRow.layer.borderColor = UIColor.black.cgColor
+
+            print(addCounter * 100)
+            addCardRow.snp.makeConstraints { (make) -> Void in
+                make.centerX.equalToSuperview()
+                make.height.equalTo(100)
+                make.top.equalTo((addSection.snp.top)).offset(addCounter * 100).priority((addCounter * 10) + 1)
+                make.right.equalTo((addSection.snp.right)).offset(0)
+            }
+            let adduserLabel = UILabel()
+            addCardRow.addSubview(adduserLabel)
+            adduserLabel.text = user.firstName
+            adduserLabel.textColor = UIColor.black
+            
+            adduserLabel.snp.makeConstraints { (make) -> Void in
+                make.centerX.equalTo(addCardRow)
+                make.top.equalTo(addCardRow.snp.top).offset(10)
+            }
+            addCounter += 1
         }
         
         
