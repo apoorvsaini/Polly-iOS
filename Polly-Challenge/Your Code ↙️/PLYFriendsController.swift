@@ -52,25 +52,47 @@ class PLYFriendsController: PLYController {
          - i.e. cardView.addSubview(yourView)
          */
         
+        /*
         let mainView = UIScrollView()
         cardView?.addSubview(mainView)
         mainView.snp.makeConstraints { (make) -> Void in
             make.centerX.equalToSuperview()
             make.height.equalTo((cardView?.snp.height)!)
             make.width.equalTo((cardView?.snp.width)!)
-           
         }
+        */
         
         //pre-calcuate the heights of sections
         let addSectionHeight : Int  = usersToAdd.count * 100
         let inviteSectionHeight : Int  = usersInContacts.count * 100
         
         
-        //Add section header for Invite
+        //Add section header for Quick Add
+        let addSectionHeader = UIView()
+        cardView?.addSubview(addSectionHeader)
+        addSectionHeader.snp.makeConstraints { (make) -> Void in
+            make.centerX.equalToSuperview()
+            make.height.equalTo(50)
+            make.width.equalTo((cardView?.snp.width)!)
+            make.top.equalTo((cardView?.snp.top)!).offset(10)
+        }
+        
+        //add section text in card view
+        let addCardSectionText = UILabel()
+        addSectionHeader.addSubview(addCardSectionText)
+        addCardSectionText.text = "Quick Adds"
+        if(usersToAdd.count == 0) {addCardSectionText.text = "No One To Add"}
+        addCardSectionText.font = UIFont.boldSystemFont(ofSize: 16.0)
+        addCardSectionText.textColor = UIColor.black
+        addCardSectionText.snp.makeConstraints { (make) -> Void in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.height.equalTo(30)
+        }
         
         //card UI for Add Friends section
         let addSection = UIView()
-        mainView.addSubview(addSection)
+        cardView?.addSubview(addSection)
         addSection.backgroundColor = UIColor.white
         addSection.layer.cornerRadius = 12
         addSection.layer.shadowColor = UIColor.black.cgColor
@@ -79,18 +101,38 @@ class PLYFriendsController: PLYController {
         addSection.layer.shadowRadius = 10
         addSection.snp.makeConstraints { (make) -> Void in
             make.centerX.equalToSuperview()
-            if(addSectionHeight == 0) {
-                make.height.equalTo(100)
-            }
-            else {
-                make.height.equalTo(addSectionHeight)
-            }
-            make.top.equalTo((cardView?.snp.top)!).offset(50)
+            make.height.equalTo(addSectionHeight)
+            make.top.equalTo((cardView?.snp.top)!).offset(80)
             make.right.equalTo((cardView?.snp.right)!).offset(-20)
         }
         
+        //Section header for Invite
+        let inviteSectionHeader = UIView()
+        cardView?.addSubview(inviteSectionHeader)
+        inviteSectionHeader.snp.makeConstraints { (make) -> Void in
+            make.centerX.equalToSuperview()
+            make.height.equalTo(50)
+            make.width.equalTo((cardView?.snp.width)!)
+            make.top.equalTo((cardView?.snp.top)!).offset(addSectionHeight + 110)
+        }
+        
+        //add section text in Invite section header
+        let inviteSectionText = UILabel()
+        inviteSectionHeader.addSubview(inviteSectionText)
+        inviteSectionText.text = "In Your Contacts"
+        if(usersInContacts.count == 0) {inviteSectionText.text = "No One To Invite"}
+        inviteSectionText.font = UIFont.boldSystemFont(ofSize: 16.0)
+        inviteSectionText.textColor = UIColor.black
+        inviteSectionText.snp.makeConstraints { (make) -> Void in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.height.equalTo(30)
+        }
+        
+        
+        //card UI for Invite Section
         let inviteSection = UIView()
-        mainView.addSubview(inviteSection)
+        cardView?.addSubview(inviteSection)
         inviteSection.backgroundColor = UIColor.white
         inviteSection.layer.cornerRadius = 12
         inviteSection.layer.shadowColor = UIColor.black.cgColor
@@ -99,13 +141,8 @@ class PLYFriendsController: PLYController {
         inviteSection.layer.shadowRadius = 10
         inviteSection.snp.makeConstraints { (make) -> Void in
             make.centerX.equalToSuperview()
-            if(addSectionHeight == 0) {
-                make.height.equalTo(100)
-            }
-            else {
-                 make.height.equalTo(inviteSectionHeight)
-            }
-            make.top.equalTo((cardView?.snp.top)!).offset(addSectionHeight + 100)
+            make.height.equalTo(inviteSectionHeight)
+            make.top.equalTo((cardView?.snp.top)!).offset(addSectionHeight + 170)
             make.right.equalTo((cardView?.snp.right)!).offset(-20)
         }
         
