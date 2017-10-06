@@ -196,6 +196,20 @@ class PLYFriendsController: PLYController {
                 make.width.equalTo(60)
                 make.right.equalTo(addCardRow.snp.right).offset(-10)
             }
+            
+            //add border
+            if(addCounter < usersToAdd.count - 1) {
+                let rowBorder = UIView()
+                addCardRow.addSubview(rowBorder)
+                rowBorder.backgroundColor = UIColor(red:0.92, green:0.92, blue:0.92, alpha:1.0)
+                rowBorder.snp.makeConstraints { (make) -> Void in
+                    make.centerX.equalTo(addCardRow)
+                    make.height.equalTo(1)
+                    make.width.equalTo(addCardRow.snp.width)
+                    make.bottom.equalTo(addCardRow.snp.bottom)
+                }
+            }
+           
             addCounter += 1
         }
         
@@ -261,6 +275,19 @@ class PLYFriendsController: PLYController {
                 make.height.equalTo(40)
                 make.width.equalTo(60)
                 make.right.equalTo(inviteCardRow.snp.right).offset(-10)
+            }
+            
+            //add border
+            if(addCounter < usersInContacts.count - 1) {
+                let rowBorder = UIView()
+                inviteCardRow.addSubview(rowBorder)
+                rowBorder.backgroundColor = UIColor(red:0.92, green:0.92, blue:0.92, alpha:1.0)
+                rowBorder.snp.makeConstraints { (make) -> Void in
+                    make.centerX.equalTo(inviteCardRow)
+                    make.height.equalTo(1)
+                    make.width.equalTo(inviteCardRow.snp.width)
+                    make.bottom.equalTo(inviteCardRow.snp.bottom)
+                }
             }
             inviteCounter += 1
         }
