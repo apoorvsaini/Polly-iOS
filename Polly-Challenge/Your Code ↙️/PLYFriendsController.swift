@@ -32,7 +32,7 @@ class PLYFriendsController: PLYController {
 
         // Super
         super.viewDidAppear(animated)
-
+        
         // Refresh users
         refreshUsers()
     }
@@ -84,7 +84,7 @@ class PLYFriendsController: PLYController {
         
         var addCounter = 0
         for user in usersToAdd {
-            var addCardRow = UIView()
+            let addCardRow = UIView()
             addSection.addSubview(addCardRow)
             print(addCounter * 100)
             addCardRow.snp.makeConstraints { (make) -> Void in
@@ -93,15 +93,27 @@ class PLYFriendsController: PLYController {
                 make.top.equalTo((addSection.snp.top)).offset(addCounter * 100).priority((addCounter * 10) + 1)
                 make.right.equalTo((addSection.snp.right)).offset(0)
             }
-            var adduserLabel = UILabel()
+            
+            //add name label
+            let adduserLabel = UILabel()
             addCardRow.addSubview(adduserLabel)
             adduserLabel.text = user.firstName
+            adduserLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
             adduserLabel.textColor = UIColor.black
-            
             adduserLabel.snp.makeConstraints { (make) -> Void in
-                make.centerX.equalTo(addCardRow)
                 make.centerY.equalTo(addCardRow)
-                //make.top.equalTo(addCardRow.snp.top).offset(10)
+                make.left.equalTo(addCardRow.snp.left).inset(100)
+            }
+            
+            //add user image
+            let addUserImage = UIImageView()
+            addCardRow.addSubview(addUserImage)
+            addUserImage.image = user.avatar
+            addUserImage.snp.makeConstraints { (make) -> Void in
+                make.centerY.equalTo(addCardRow)
+                make.height.equalTo(50)
+                make.width.equalTo(50)
+                make.left.equalTo(addCardRow.snp.left).inset(10)
             }
             addCounter += 1
         }
