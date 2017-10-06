@@ -46,12 +46,20 @@ class PLYFriendsController: PLYController {
         // Super
         super.setupUI()
         let cardView = self.cardView
-    
+        
         /*
          NOTE: Instead of adding your subviews to the controller's view, make sure to add them to cardView.
          - i.e. cardView.addSubview(yourView)
          */
         
+        let mainView = UIScrollView()
+        cardView?.addSubview(mainView)
+        mainView.snp.makeConstraints { (make) -> Void in
+            make.centerX.equalToSuperview()
+            make.height.equalTo((cardView?.snp.height)!)
+            make.width.equalTo((cardView?.snp.width)!)
+           
+        }
         
         //pre-calcuate the height of sections
         let addSectionHeight : Int  = usersToAdd.count * 100
@@ -59,7 +67,7 @@ class PLYFriendsController: PLYController {
         
         //card UI for Add Friends section
         let addSection = UIView()
-        cardView?.addSubview(addSection)
+        mainView.addSubview(addSection)
         addSection.backgroundColor = UIColor.white
         addSection.layer.cornerRadius = 12
         addSection.snp.makeConstraints { (make) -> Void in
@@ -70,7 +78,7 @@ class PLYFriendsController: PLYController {
         }
         
         let inviteSection = UIView()
-        cardView?.addSubview(inviteSection)
+        mainView.addSubview(inviteSection)
         inviteSection.backgroundColor = UIColor.white
         inviteSection.layer.cornerRadius = 12
         inviteSection.snp.makeConstraints { (make) -> Void in
@@ -79,7 +87,8 @@ class PLYFriendsController: PLYController {
             make.top.equalTo((cardView?.snp.top)!).offset(addSectionHeight + 100)
             make.right.equalTo((cardView?.snp.right)!).offset(-20)
         }
-        
+    
+
         //UI for each row in add view card
         var addCounter = 0
         for user in usersToAdd {
@@ -181,9 +190,12 @@ class PLYFriendsController: PLYController {
             //add "Add" button
             let addButton = UIButton()
             inviteCardRow.addSubview(addButton)
-            addButton.setTitle("+ Add", for: .normal)
-            addButton.backgroundColor = UIColor(red:0.00, green:0.76, blue:1.00, alpha:1.0)
+            addButton.setTitle("+ Invite", for: .normal)
+            addButton.backgroundColor = .clear
             addButton.layer.cornerRadius = 20
+            addButton.layer.borderWidth = 2
+            addButton.layer.borderColor = UIColor(red:0.41, green:0.41, blue:0.41, alpha:1.0).cgColor
+            addButton.setTitleColor(UIColor(red:0.41, green:0.41, blue:0.41, alpha:1.0), for: .normal)
             addButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 10.0)
             addButton.titleEdgeInsets = UIEdgeInsetsMake(10,10,10,10)
             addButton.snp.makeConstraints { (make) -> Void in
