@@ -81,12 +81,11 @@ class PLYFriendsController: PLYController {
         }
         
         //UI for each row in add view card
-        let addCardRow = UIView()
+        
         var addCounter = 0
         for user in usersToAdd {
-            print(user.firstName)
+            var addCardRow = UIView()
             addSection.addSubview(addCardRow)
-
             print(addCounter * 100)
             addCardRow.snp.makeConstraints { (make) -> Void in
                 make.centerX.equalToSuperview()
@@ -94,14 +93,15 @@ class PLYFriendsController: PLYController {
                 make.top.equalTo((addSection.snp.top)).offset(addCounter * 100).priority((addCounter * 10) + 1)
                 make.right.equalTo((addSection.snp.right)).offset(0)
             }
-            let adduserLabel = UILabel()
+            var adduserLabel = UILabel()
             addCardRow.addSubview(adduserLabel)
             adduserLabel.text = user.firstName
             adduserLabel.textColor = UIColor.black
             
             adduserLabel.snp.makeConstraints { (make) -> Void in
                 make.centerX.equalTo(addCardRow)
-                make.top.equalTo(addCardRow.snp.top).offset(10)
+                make.centerY.equalTo(addCardRow)
+                //make.top.equalTo(addCardRow.snp.top).offset(10)
             }
             addCounter += 1
         }
