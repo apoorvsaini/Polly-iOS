@@ -51,16 +51,7 @@ class PLYFriendsController: PLYController {
          NOTE: Instead of adding your subviews to the controller's view, make sure to add them to cardView.
          - i.e. cardView.addSubview(yourView)
          */
-        
-        /*
-        let mainView = UIScrollView()
-        cardView?.addSubview(mainView)
-        mainView.snp.makeConstraints { (make) -> Void in
-            make.centerX.equalToSuperview()
-            make.height.equalTo((cardView?.snp.height)!)
-            make.width.equalTo((cardView?.snp.width)!)
-        }
-        */
+
         
         //pre-calcuate the heights of sections
         let addSectionHeight : Int  = usersToAdd.count * 100
@@ -77,7 +68,8 @@ class PLYFriendsController: PLYController {
             make.top.equalTo((cardView?.snp.top)!).offset(10)
         }
         
-        //add section text in card view
+        
+        //add section text in Add section header
         let addCardSectionText = UILabel()
         addSectionHeader.addSubview(addCardSectionText)
         addCardSectionText.text = "Quick Adds"
@@ -88,6 +80,26 @@ class PLYFriendsController: PLYController {
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
             make.height.equalTo(30)
+        }
+        
+        //Add left right borders to section headers
+        let leftAddBorder = UIView()
+        addSectionHeader.addSubview(leftAddBorder)
+        leftAddBorder.backgroundColor = UIColor(red:0.83, green:0.83, blue:0.83, alpha:1.0)
+        leftAddBorder.snp.makeConstraints { (make) -> Void in
+            make.centerY.equalTo(addSectionHeader)
+            make.height.equalTo(1)
+            make.left.equalToSuperview().offset(8)
+            make.trailing.equalTo(addCardSectionText.snp.leadingMargin).offset(-20)
+        }
+        let rightAddBorder = UIView()
+        addSectionHeader.addSubview(rightAddBorder)
+        rightAddBorder.backgroundColor = UIColor(red:0.83, green:0.83, blue:0.83, alpha:1.0)
+        rightAddBorder.snp.makeConstraints { (make) -> Void in
+            make.centerY.equalTo(addSectionHeader)
+            make.height.equalTo(1)
+            make.right.equalToSuperview().offset(-8)
+            make.leading.equalTo(addCardSectionText.snp.trailingMargin).offset(20)
         }
         
         //card UI for Add Friends section
@@ -127,6 +139,26 @@ class PLYFriendsController: PLYController {
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
             make.height.equalTo(30)
+        }
+        
+        //Add left right borders to section headers
+        let leftInviteBorder = UIView()
+        inviteSectionHeader.addSubview(leftInviteBorder)
+        leftInviteBorder.backgroundColor = UIColor(red:0.83, green:0.83, blue:0.83, alpha:1.0)
+        leftInviteBorder.snp.makeConstraints { (make) -> Void in
+            make.centerY.equalTo(inviteSectionHeader)
+            make.height.equalTo(1)
+            make.left.equalToSuperview().offset(8)
+            make.trailing.equalTo(inviteSectionText.snp.leadingMargin).offset(-20)
+        }
+        let rightInviteBorder = UIView()
+        inviteSectionHeader.addSubview(rightInviteBorder)
+        rightInviteBorder.backgroundColor = UIColor(red:0.83, green:0.83, blue:0.83, alpha:1.0)
+        rightInviteBorder.snp.makeConstraints { (make) -> Void in
+            make.centerY.equalTo(inviteSectionHeader)
+            make.height.equalTo(1)
+            make.right.equalToSuperview().offset(-8)
+            make.leading.equalTo(inviteSectionText.snp.trailingMargin).offset(20)
         }
         
         
